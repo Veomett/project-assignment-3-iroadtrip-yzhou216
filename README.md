@@ -4,7 +4,7 @@ Can you plan the path for a road trip from one country to another?
 
 Change the java source code, but do not change the data files. See Canvas for assignment details.
 
-# Notes *grader PLEASE READ*
+# Notes (*grader PLEASE READ*)
 
 This project is built with Maven. There might be variations on
 different systems and/or different versions of Maven. On my GNU/Linux
