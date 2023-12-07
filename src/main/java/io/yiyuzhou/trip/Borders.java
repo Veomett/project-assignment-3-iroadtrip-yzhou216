@@ -1,9 +1,9 @@
 package io.yiyuzhou.trip;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,24 +20,24 @@ public class Borders {
 		return graph;
 	}
 
-	public Borders() throws IOException, ParseException {
-		String[] lines = getBorderFileLines();
-		parseCountryBorders(lines);
+	public Borders(String borderPath, String capdistPath, String stateNamePath) throws IOException, ParseException {
+		String[] lines = getBorderFileLines(borderPath);
+		parseCountryBorders(lines, capdistPath, stateNamePath);
 	}
 
-	private String[] getBorderFileLines() throws IOException {
-		InputStream is = Borders.class.getClassLoader().getResourceAsStream("borders.txt");
-		if (is == null)
+	private String[] getBorderFileLines(String filePath) throws IOException {
+		File file = new File(filePath);
+		if (!file.exists())
 			throw new IllegalArgumentException("File not found!");
 
 		List<Object> linesList;
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
 			linesList = reader.lines().collect(Collectors.toList());
 		}
 
 		String[] lines = new String[linesList.size()];
 		for (int i = 0; i < lines.length; i++)
-			lines[i] = linesList.get(i).toString();
+			lines[i] = (String) linesList.get(i);
 
 		return lines;
 	}
@@ -61,9 +61,9 @@ public class Borders {
 		return ret;
 	}
 
-	private void parseCountryBorders(String[] lines) throws IOException {
-		Capdists capdists = new Capdists();
-		StateName stateName = new StateName();
+	private void parseCountryBorders(String[] lines, String capdistPath, String stateNamePath) throws IOException {
+		Capdists capdists = new Capdists(capdistPath);
+		StateName stateName = new StateName(stateNamePath);
 
 		for (String line : lines) {
 			String[] parts = line.split(" = ");
