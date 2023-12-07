@@ -6,10 +6,15 @@ Change the java source code, but do not change the data files. See Canvas for as
 
 # Notes (*grader PLEASE READ*)
 
-This project is built with Maven. There might be variations on
-different systems and/or different versions of Maven. On my GNU/Linux
-system (fedora), to run the program, you can use this command in the
-project root directory:
+This project is built with Apache Maven. To build this project, run:
+
+``` shell
+$ mvn clean package
+```
+
+There might be variations on different systems and/or different
+versions of Maven. On my GNU/Linux system (fedora), to run the
+program, you can use this command in the project root directory:
 
 ```shell
 java -cp \
