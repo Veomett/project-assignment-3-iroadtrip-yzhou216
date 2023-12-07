@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class IRoadTrip {
 	public static void main(String[] args) throws IOException, ParseException {
-		Borders borders = new Borders(args[0], args[1], args[2]);
+		Borders borders = new Borders();
 		acceptUserInput(borders);
 	}
 

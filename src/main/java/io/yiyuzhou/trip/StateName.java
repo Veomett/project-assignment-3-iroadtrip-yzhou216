@@ -1,7 +1,6 @@
 package io.yiyuzhou.trip;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -15,19 +14,19 @@ import org.apache.commons.csv.CSVRecord;
 public class StateName {
 	private HashMap<String, String> countryNameIds;
 
-	public StateName(String path) {
+	public StateName() {
 		countryNameIds = new HashMap<>();
-		parseStateNames(path);
+		parseStateNames();
 	}
 
 	public String getId(String countryName) {
 		return countryNameIds.get(countryName);
 	}
 
-	private void parseStateNames(String filePath) {
+	private void parseStateNames() {
 		try {
-			/* open the file from the provided file path */
-			InputStream inputStream = new FileInputStream(filePath);
+			/* load the TSV file from the resources directory */
+			InputStream inputStream = StateName.class.getClassLoader().getResourceAsStream("state_name.tsv");
 			Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
 			/* define the TSV format and create the parser */

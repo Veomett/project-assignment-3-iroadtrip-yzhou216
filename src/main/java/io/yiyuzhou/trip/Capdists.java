@@ -1,8 +1,8 @@
 package io.yiyuzhou.trip;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,9 +15,9 @@ import org.apache.commons.csv.CSVRecord;
 public class Capdists {
 	public HashMap<List<String>, Integer> capdists = new HashMap<>();
 
-	public Capdists(String path) throws IOException {
+	public Capdists() throws IOException {
 		capdists = new HashMap<List<String>, Integer>();
-		parseCSV(path);
+		parseCSV("capdist.csv");
 	}
 
 	public int getDistance(String country0, String country1) {
@@ -30,9 +30,13 @@ public class Capdists {
 		return ret;
 	}
 
-	private void parseCSV(String filePath) throws IOException {
-		/* Open the file from the provided file path */
-		try (Reader reader = new FileReader(filePath, StandardCharsets.UTF_8)) {
+	private void parseCSV(String fileName) throws IOException {
+		/* Access the file as a resource */
+		try (InputStream is = Capdists.class.getClassLoader().getResourceAsStream(fileName)) {
+			if (is == null)
+				throw new IOException("Resource not found: " + fileName);
+
+			InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
 
 			try (CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 				for (CSVRecord record : csvParser) {
