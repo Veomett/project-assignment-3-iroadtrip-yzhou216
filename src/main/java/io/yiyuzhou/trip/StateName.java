@@ -24,6 +24,11 @@ public class StateName {
 		return countryNameIds.get(countryName);
 	}
 
+	/**
+	 * Parses the CSV file and stores the data in the countryNameIds hashmap.
+	 *
+	 * @param filePath the path to the CSV file
+	 */
 	private void parseStateNames(String filePath) {
 		try {
 			/* open the file from the provided file path */

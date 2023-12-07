@@ -20,6 +20,13 @@ public class Capdists {
 		parseCSV(path);
 	}
 
+	/**
+	 * Returns the distance between two countries.
+	 *
+	 * @param country0 the name of the first country
+	 * @param country1 the name of the second country
+	 * @return the distance between country0 and country1
+	 */
 	public int getDistance(String country0, String country1) {
 		int ret;
 		if (capdists.get(Arrays.asList(country0, country1)) == null)
@@ -30,6 +37,12 @@ public class Capdists {
 		return ret;
 	}
 
+	/**
+	 * Parses the CSV file and stores the data in the capdists hashmap.
+	 *
+	 * @param filePath the path to the CSV file
+	 * @throws IOException
+	 */
 	private void parseCSV(String filePath) throws IOException {
 		/* Open the file from the provided file path */
 		try (Reader reader = new FileReader(filePath, StandardCharsets.UTF_8)) {

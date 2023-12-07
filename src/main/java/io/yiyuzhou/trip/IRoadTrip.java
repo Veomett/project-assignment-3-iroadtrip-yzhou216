@@ -19,6 +19,27 @@ public class IRoadTrip {
 		acceptUserInput(borders);
 	}
 
+	/**
+	 * Finds the shortest path between two countries using Dijkstra's algorithm.
+	 * This method computes the shortest path in terms of distance (or cost)
+	 * between the specified countries in the given borders graph.
+	 *
+	 * The method initializes distances to all countries as infinity,
+	 * then gradually finds the shortest path by exploring adjacent countries.
+	 * If a shorter path to a country is found, it updates the distance and
+	 * the path. The path is reconstructed in reverse at the end of the algorithm.
+	 *
+	 * @param country1 The starting country for the path.
+	 * @param country2 The destination country for the path.
+	 * @param borders  The Borders object containing the graph of countries and
+	 *                 their connections.
+	 * @return A list of strings representing the path from country1 to country2,
+	 *         each element showing the step in the format "CountryA --> CountryB
+	 *         (distance km.)".
+	 *         Returns null if no path exists between the two countries.
+	 * @throws IllegalArgumentException If the borders graph does not contain
+	 *         country1 or country2.
+	 */
 	public static List<String> findPath(String country1, String country2, Borders borders) {
 		PriorityQueue<Node> minDistance = new PriorityQueue<>();
 		HashMap<String, Integer> distances = new HashMap<>();
@@ -83,6 +104,12 @@ public class IRoadTrip {
 		return ret;
 	}
 
+	/**
+	 * Accepts user input and finds the shortest path between two countries.
+	 *
+	 * @param borders the borders object
+	 * @throws IOException
+	 */
 	public static void acceptUserInput(Borders borders) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		for (;;) {

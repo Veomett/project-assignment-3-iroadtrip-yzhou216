@@ -25,6 +25,14 @@ public class Borders {
 		parseCountryBorders(lines, capdistPath, stateNamePath);
 	}
 
+	/**
+	 * Reads the file and returns an array of strings, where each string is a line
+	 * in the file.
+	 *
+	 * @param filePath
+	 * @return
+	 * @throws IOException
+	 */
 	private String[] getBorderFileLines(String filePath) throws IOException {
 		File file = new File(filePath);
 		if (!file.exists())
@@ -42,6 +50,12 @@ public class Borders {
 		return lines;
 	}
 
+	/**
+	 * Extracts the countries from the input string.
+	 *
+	 * @param input
+	 * @return
+	 */
 	private List<String> extractCountries(String input) {
 		List<String> ret;
 		if (input == null) {
@@ -61,6 +75,14 @@ public class Borders {
 		return ret;
 	}
 
+	/**
+	 * Parses the country borders file and creates a graph.
+	 *
+	 * @param lines
+	 * @param capdistPath
+	 * @param stateNamePath
+	 * @throws IOException
+	 */
 	private void parseCountryBorders(String[] lines, String capdistPath, String stateNamePath) throws IOException {
 		Capdists capdists = new Capdists(capdistPath);
 		StateName stateName = new StateName(stateNamePath);
@@ -99,6 +121,11 @@ public class Borders {
 		}
 	}
 
+	/**
+	 * Returns a HashMap of edge cases.
+	 *
+	 * @return
+	 */
 	private HashMap<String, String> edgeCases() {
 		HashMap<String, String> edgeCases = new HashMap<>();
 		edgeCases.put("United States", "United States of America");
